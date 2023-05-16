@@ -1,0 +1,106 @@
+v---
+- name: Configure Cisco Catalyst 2960
+  hosts: switch
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Configure hostname
+      ios_command:
+        commands: 
+          - "hostname sw03"
+
+    - name: Configure domain name
+      ios_command:
+        commands: 
+          - "ip domain-name techlab.net"
+
+    - name: Configure name servers
+      ios_command:
+        commands:
+          - "ip name-server 192.168.1.54"
+          - "ip name-server 192.168.5.54"
+
+    - name: Configure VLANs
+      ios_command:
+        commands:
+          - "vlan 100"
+          - " name office_vlan"
+          - "vlan 999"
+          - " name native_vlan"
+          - "vlan 1021"
+          - " name wifi_vlan"
+          - "vlan 1717"
+          - " name acd_vlan"
+
+    - name: Configure interfaces
+      ios_command:
+        commands:
+          - "interface FastEthernet0"
+          - " no ip address"
+          - " shutdown"
+          - "interface GigabitEthernet0/1-37"
+          - " switchport access vlan 100"
+          - " switchport mode access"
+          - "interface GigabitEthernet0/41-42"
+          - " switchport access vlan 1021"
+          - " switchport mode access"
+          - "interface GigabitEthernet0/43-45"
+          - " switchport access vlan 1717"
+          - " switchport mode access"
+          # Add more interface configurations here...
+
+    - name: Configure trunk interface
+      ios_command:
+        commands:
+          - "interface GigabitEthernet0/48"
+          - " switchport trunk native vlan 999"
+          - " switchport trunk allowed vlan 100,1021,1717"
+          - " switchport mode trunk"
+
+    - name: Configure management interface
+      ios_command:
+        commands:
+          - "interface Vlan1"
+          - " no ip address"
+          - " shutdown"
+
+    - name: Configure management IP address
+      ios_command:
+        commands:
+          - "interface Vlan100"
+          - " ip address 192.168.10.156 255.255.240.0"
+
+    - name: Configure default gateway
+      ios_command:
+        commands:
+          - "ip default-gateway 192.168.1.1"
+
+    - name: Configure SNMP
+      ios_command:
+        commands:
+          - "snmp-server community snmpnetkey RO 5"
+          - "snmp-server enable traps tty"
+          - "snmp-server enable traps license"
+          # Add more SNMP configurations here...
+
+    - name: Configure SSH
+      ios_command:
+        commands:
+          - "ip ssh version 2"
+
+    - name: Configure logging
+      ios_command:
+        commands:
+          - "logging host 192.168.51.143"
+
+    - name: Configure access control
+      ios_command:
+        commands:
+          - "access-list 5 permit 192.168.51.51"
+          - "access-list 10 permit 192.168.6.17"
+          - "access-list 10 permit 10.11.6.0 0.0.0.255"
+
+    - name: Save configuration
+      ios_command:
+        commands:
+          - "write memory"
