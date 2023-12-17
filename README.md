@@ -52,7 +52,7 @@ switch(config)#exit
 
 #### How to Run The Playbook
 
-- check the ssh connecectiviuty to target device (check ping and ssh commend )
+- check the ssh connection to target device (NC -vz <IP address of host > 22)
 - Add newtarget hosts to the ```inventory.yml``` file .
 ```sh 
 ---
@@ -63,7 +63,11 @@ all:
         192.168.6.25:
             ansible_user: shahin  
             username: shahin123
-```
+
+```sh
+- Playbook can be run with the following command:
+
+$ ansible-playbook -v playbook.yml --extra-vars "@password_secret.yml"
 
 
  
