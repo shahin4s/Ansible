@@ -64,10 +64,12 @@ all:
             ansible_user: shahin  
             username: shahin123
 
-```sh
-- Playbook can be run with the following command:
+```
 
+- Playbook can be run with the following command:
+```sh 
 $ ansible-playbook -v playbook.yml --extra-vars "@password_secret.yml"
+```
 
 
  
