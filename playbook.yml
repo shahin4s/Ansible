@@ -78,7 +78,7 @@ v---
     - name: Configure SNMP
       ios_command:
         commands:
-          - "snmp-server community snmpnetkey RO 5"
+          - "snmp-server community snmpkey RO 5"
           - "snmp-server enable traps tty"
           - "snmp-server enable traps license"
           # Add more SNMP configurations here...
@@ -91,12 +91,12 @@ v---
     - name: Configure logging
       ios_command:
         commands:
-          - "logging host 192.168.51.143"
+          - "logging host 192.168.1.143"
 
     - name: Configure access control
       ios_command:
         commands:
-          - "access-list 5 permit 192.168.51.51"
+          - "access-list 5 permit 192.168.1.51"
           - "access-list 10 permit 192.168.6.17"
           - "access-list 10 permit 10.11.6.0 0.0.0.255"
 
