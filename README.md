@@ -34,6 +34,59 @@ shahine@shahin:~$ ansible --version
   libyaml = True
 ```
 
+### Set up a project directory with inventories, roles, and playbooks.
+    Organize your files and playbooks logically for maintainability
+
+ # Ansible Project
+
+This repository contains an Ansible project structured to manage both production and staging environments using playbooks, roles, and inventories.
+
+## Project Structure
+
+### `inventories/`
+Contains the inventory files for different environments.
+
+- **`production/`**: Inventory and variables for the production environment.
+  - **`group_vars/`**: Contains environment-specific variables.
+    - **`all.yml`**: Common variables for all hosts in the environment.
+    - **`webservers.yml`**: Variables specific to web server hosts in the production environment.
+  - **`hosts`**: The inventory file listing hosts in the production environment.
+  
+- **`staging/`**: Inventory for the staging environment.
+  - **`hosts`**: The inventory file listing hosts in the staging environment.
+
+### `roles/`
+Contains reusable roles for automation tasks.
+
+- **`common/`**: A role that applies to all servers in the environment.
+  - **`tasks/`**: Contains the tasks that will be executed by the role.
+  - **`handlers/`**: Defines handlers that can be triggered by tasks.
+  - **`templates/`**: Stores Jinja2 templates used by the role.
+  - **`files/`**: Contains files that can be copied to managed nodes.
+  - **`vars/`**: Contains variables specific to this role.
+  - **`defaults/`**: Defines the default values for variables in this role.
+  - **`meta/`**: Describes the role and any dependencies on other roles.
+
+### `playbooks/`
+Contains the main playbook files for your environment.
+
+- **`site.yml`**: The main playbook that runs the entire configuration, typically includes roles for all environments.
+- **`webservers.yml`**: Playbook specific to configuring web servers.
+
+### `ansible.cfg`
+Configuration file for Ansible, specifying settings like inventory locations, SSH keys, etc.
+
+## Setup and Usage
+
+### 1. Install Ansible
+
+If you don't have Ansible installed, you can install it using pip:
+
+```bash
+pip install ansible
+
+
+
 ####  SSH enabled on switch also enable passowrd base login.
  - Connect your console cable from your computer's serial port to the console port
  - Open a terminal emulator program on your computer, such as PuTTY (for Windows) 
