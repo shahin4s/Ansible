@@ -1,0 +1,16 @@
+- name: Deploy resolv.conf file
+  hosts: mail01
+  become: yes
+  tasks:
+    - name: Backup resolve.conf
+      copy:
+              src: /etc/resolv.conf
+              dest: /etc/resolv.conf.bkp
+              remote_src: yes
+    - name: Copy resolv.conf to the target system
+      copy:
+        src: /home/shahin/ansible-project/roles/files/resolv.conf
+        dest: /etc/resolv.conf
+        owner: root
+        group: root
+        mode: '0644'
