@@ -1,5 +1,4 @@
-Sure! Below is a blog post in Markdown format, detailing the process of automating Cisco switch configuration with Ansible.
-
+ANSIBLE CONFIGURATION AND DEPLOYMENT 
 ---
 
 ```markdown
@@ -169,23 +168,6 @@ Now, write the Ansible playbook to deploy the configuration file to the target s
         mode: '0644'
 ```
 
-## Configuring SSH on Cisco Switch
-
-To enable SSH and set login credentials on your Cisco switch, follow these steps:
-
-1. Connect to the switch via console cable and terminal emulator (such as PuTTY).
-2. Enter configuration mode and set up the SSH username and password:
-
-```bash
-switch# enable
-switch# conf t
-switch(config)# username shahin privilege 15 secret shahin123
-switch(config)# crypto key generate rsa modulus 2048
-switch(config)# line vty 0 15
-switch(config)# transport input ssh
-switch(config)# copy running-config startup-config
-switch(config)# exit
-```
 
 ## Running the Playbook
 
@@ -215,19 +197,21 @@ mail01                     : ok=3    changed=1    unreachable=0    failed=0    s
 
 This confirms that the `resolv.conf` file was successfully copied to the target system.
 
-## Conclusion
 
-In this tutorial, we demonstrated how to automate the configuration of Cisco switches using Ansible. We covered the process of setting up Ansible, configuring an inventory, writing a playbook, and deploying configuration files. By automating these tasks, you can save time and reduce the risk of human error in network device configuration.
+## Configuring SSH on Cisco Switch
 
-Feel free to expand the playbook with additional tasks for further automation, such as setting up VLANs, interfaces, or routing protocols.
+To enable SSH and set login credentials on your Cisco switch, follow these steps:
 
----
+1. Connect to the switch via console cable and terminal emulator (such as PuTTY).
+2. Enter configuration mode and set up the SSH username and password:
 
-### Further Reading
+```bash
+switch# enable
+switch# conf t
+switch(config)# username shahin privilege 15 secret shahin123
+switch(config)# crypto key generate rsa modulus 2048
+switch(config)# line vty 0 15
+switch(config)# transport input ssh
+switch(config)# copy running-config startup-config
+switch(config)# exit
 
-- [Ansible Documentation](https://docs.ansible.com/)
-- [Cisco Ansible Modules](https://docs.ansible.com/ansible/latest/collections/cisco/ios/ios_config_module.html)
-
----
-
-This is a simple, readable format for a blog post. If you need further customizations or modifications, feel free to ask!
