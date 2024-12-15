@@ -25,3 +25,27 @@ ansible_become_password: your_enable_password
 
 
 ### Create a Configuration Template
+link
+
+### Create a Playbook
+
+Create the ```playbooks/cisco_switch_deploye.yml``` playbook to apply configurations:
+
+```
+---
+- name: Deploy configuration to Cisco switches
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Push configuration to switches
+      ios_config:
+        src: templates/cisco_switch_conf.yml
+
+```
+
+### Run the Playbook
+
+```ansible-playbook -i inventories/hosts.ini templates/cisco_switch_conf.yml --check```
+
+
