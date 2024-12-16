@@ -1,8 +1,5 @@
-ANSIBLE CONFIGURATION AND DEPLOYMENT 
+# ANSIBLE CONFIGURATION AND DEPLOYMENT 
 ---
-
-```markdown
-# Automating Cisco Switch Configuration with Ansible
 
 ## Introduction
 
