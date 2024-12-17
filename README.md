@@ -195,20 +195,5 @@ mail01                     : ok=3    changed=1    unreachable=0    failed=0    s
 This confirms that the `resolv.conf` file was successfully copied to the target system.
 
 
-## Configuring SSH on Cisco Switch
 
-To enable SSH and set login credentials on your Cisco switch, follow these steps:
-
-1. Connect to the switch via console cable and terminal emulator (such as PuTTY).
-2. Enter configuration mode and set up the SSH username and password:
-
-```bash
-switch# enable
-switch# conf t
-switch(config)# username shahin privilege 15 secret shahin123
-switch(config)# crypto key generate rsa modulus 2048
-switch(config)# line vty 0 15
-switch(config)# transport input ssh
-switch(config)# copy running-config startup-config
-switch(config)# exit
 
