@@ -25,7 +25,7 @@ ansible_become_password: your_enable_password
 
 
 ### Create a Configuration Template
-link
+Create the configuration file you want to deploy to the target systems. For example, we are updating the cisco_switch_conf.yml file for the cisco 2960.
 
 ### Create a Playbook
 
@@ -43,7 +43,24 @@ Create the ```playbooks/cisco_switch_deploye.yml``` playbook to apply configurat
         src: templates/cisco_switch_conf.yml
 
 ```
+## Configuring SSH on Cisco Switch
 
+To enable SSH and set login credentials on your Cisco switch, follow these steps:
+
+1. Connect to the switch via console cable and terminal emulator (such as PuTTY).
+2. Enter configuration mode and set up the SSH username and password:
+
+```bash
+switch# enable
+switch# conf t
+switch(config)# username shahin privilege 15 secret shahin123
+switch(config)# crypto key generate rsa modulus 2048
+switch(config)# line vty 0 15
+switch(config)# transport input ssh
+switch(config)# copy running-config startup-config
+switch(config)# exit
+
+```
 ### Run the Playbook
 
 ```ansible-playbook -i inventories/hosts.ini templates/cisco_switch_conf.yml --check```
